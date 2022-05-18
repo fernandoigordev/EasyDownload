@@ -1,0 +1,10 @@
+*.local
+*.identcache
+*.res
+*.dcu
+*.log
+*.zip
+*.~*
+__history/
+__recovery/
+src/__history/
