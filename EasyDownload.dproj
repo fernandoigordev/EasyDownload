@@ -86,6 +86,8 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_ExeOutput>.\</DCC_ExeOutput>
+        <DCC_DcuOutput>.\DCU</DCC_DcuOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -96,6 +98,10 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <DCC_ExeOutput>.\</DCC_ExeOutput>
+        <DCC_DcuOutput>.\DCU</DCC_DcuOutput>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -118,6 +124,17 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Presentation\Presentation.Routes.pas"/>
+        <DCCReference Include="src\Domain\UseCases\Download\History\Domain.UseCase.Download.History.Interfaces.pas"/>
+        <DCCReference Include="src\Domain\Abstractions\Domain.Abstraction.Download.pas"/>
+        <DCCReference Include="src\Domain\UseCases\Download\History\Domain.UseCase.Download.History.pas"/>
+        <DCCReference Include="src\Data\Repositories\Download\Data.Repository.Download.Interfaces.pas"/>
+        <DCCReference Include="src\Data\Repositories\Download\Data.Repository.Download.SqLite.pas"/>
+        <DCCReference Include="src\Presentation\Controllers\Download\Presentation.Controller.Download.History.pas"/>
+        <DCCReference Include="src\Data\Database\Data.Database.DataModule.pas">
+            <Form>DataModule1</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -143,12 +160,6 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\EasyDownload.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>EasyDownload.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\EasyDownload.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>EasyDownload.exe</RemoteName>

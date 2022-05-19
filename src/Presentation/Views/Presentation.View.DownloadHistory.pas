@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxGDIPlusClasses, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.DBCGrids, System.ImageList,
-  Vcl.ImgList, Data.DB, Datasnap.DBClient;
+  Vcl.ImgList, Data.DB, Datasnap.DBClient, Presentation.Controller.Download.History,
+  Data.Repository.Download.Interfaces, Data.Repository.Download.SqLite, Vcl.DBCtrls;
 
 type
   TfrmViewDownloadHistory = class(TForm)
@@ -21,14 +22,23 @@ type
     imgButton: TImage;
     imgListButton: TImageList;
     pnlContentHistory: TPanel;
-    lblUrl: TLabel;
-    lblDataInformation: TLabel;
     cdsDownloadHistory: TClientDataSet;
     dsDownloadHistory: TDataSource;
+    cdsDownloadHistoryURL: TStringField;
+    cdsDownloadHistoryDateDetails: TStringField;
+    cdsDownloadHistoryIconIndex: TIntegerField;
+    mmUrl: TDBMemo;
+    mmDateDetails: TDBMemo;
     procedure FormCreate(Sender: TObject);
     procedure imgBackClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure grdDownloadHistoryPaintPanel(DBCtrlGrid: TDBCtrlGrid; Index: Integer);
   private
     { Private declarations }
+    FControllerDownloadHistory: TControllerDownloadHistory;
+    FRepositoryDownload: IRepositoryDownload;
+    procedure SetValues;
   public
     { Public declarations }
   end;
@@ -37,18 +47,41 @@ var
   frmViewDownloadHistory: TfrmViewDownloadHistory;
 
 implementation
-uses Presentation.Routes;
+uses Presentation.Routes, Data.Database.DataModule;
 
 {$R *.dfm}
 
 procedure TfrmViewDownloadHistory.FormCreate(Sender: TObject);
 begin
   {Se tiver download em andamento mostra o progresso}
+  FRepositoryDownload := RepositoryDownloadSqLite.Create(DataModule1.FDConnection);
+  FControllerDownloadHistory := TControllerDownloadHistory.Create(FRepositoryDownload);
+end;
+
+procedure TfrmViewDownloadHistory.FormDestroy(Sender: TObject);
+begin
+  FControllerDownloadHistory.Free;
+end;
+
+procedure TfrmViewDownloadHistory.FormShow(Sender: TObject);
+begin
+ FControllerDownloadHistory.Handle(cdsDownloadHistory);
+end;
+
+procedure TfrmViewDownloadHistory.grdDownloadHistoryPaintPanel(DBCtrlGrid: TDBCtrlGrid; Index: Integer);
+begin
+  SetValues;
 end;
 
 procedure TfrmViewDownloadHistory.imgBackClick(Sender: TObject);
 begin
+  Close;
   Routes.SetElement(rViewMenu);
+end;
+
+procedure TfrmViewDownloadHistory.SetValues;
+begin
+  imgListButton.GetBitmap(cdsDownloadHistoryIconIndex.AsInteger, imgButton.Picture.Bitmap);
 end;
 
 end.

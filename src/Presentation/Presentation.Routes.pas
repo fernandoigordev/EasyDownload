@@ -59,6 +59,8 @@ begin
         ViewMenu.Align  := alClient;
         ViewMenu.Show;
       end;
+      if not ViewMenu.Showing then
+        ViewMenu.Show;
       ViewMenu.BringToFront;
     end;
 
@@ -71,6 +73,8 @@ begin
         ViewDownload.Align  := alClient;
         ViewDownload.Show;
       end;
+      if not ViewDownload.Showing then
+        ViewDownload.Show;
       ViewDownload.BringToFront;
     end;
 
@@ -81,8 +85,9 @@ begin
         ViewDownloadHistory := TfrmViewDownloadHistory.Create(FParent);
         ViewDownloadHistory.Parent := FParent;
         ViewDownloadHistory.Align  := alClient;
-        ViewDownloadHistory.Show;
       end;
+      if not ViewDownloadHistory.Showing then
+        ViewDownloadHistory.Show;
       ViewDownloadHistory.BringToFront;
     end;
 
