@@ -303,7 +303,7 @@ object frmViewDownload: TfrmViewDownload
       object lblMoreDetails: TLabel
         AlignWithMargins = True
         Left = 3
-        Top = 154
+        Top = 160
         Width = 571
         Height = 19
         Cursor = crHandPoint
@@ -325,15 +325,19 @@ object frmViewDownload: TfrmViewDownload
         ExplicitWidth = 427
       end
       object pnlDownloadingInfo: TPanel
-        Left = 0
-        Top = 0
-        Width = 577
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 571
         Height = 87
         Align = alTop
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
         TabOrder = 0
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 577
         object imgDownloading: TImage
           AlignWithMargins = True
           Left = 3
@@ -481,12 +485,12 @@ object frmViewDownload: TfrmViewDownload
         end
         object Image1: TImage
           AlignWithMargins = True
-          Left = 551
+          Left = 529
           Top = 60
-          Width = 23
+          Width = 39
           Height = 27
           Cursor = crHandPoint
-          Margins.Left = 10
+          Margins.Left = 5
           Margins.Top = 60
           Margins.Bottom = 0
           Align = alRight
@@ -910,33 +914,33 @@ object frmViewDownload: TfrmViewDownload
           Proportional = True
           Stretch = True
           OnClick = Image1Click
-          ExplicitLeft = 544
-          ExplicitTop = 4
-          ExplicitHeight = 105
+          ExplicitHeight = 26
         end
         object pnlDownloadingContent: TPanel
           Left = 111
           Top = 0
-          Width = 430
+          Width = 413
           Height = 87
           Align = alClient
           BevelOuter = bvNone
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
+          ExplicitWidth = 430
           object ProgressBar1: TProgressBar
             Left = 0
             Top = 71
-            Width = 430
+            Width = 413
             Height = 16
             Align = alBottom
             TabOrder = 0
+            ExplicitWidth = 430
           end
           object mmUrlDownload: TMemo
             AlignWithMargins = True
             Left = 3
             Top = 5
-            Width = 424
+            Width = 407
             Height = 60
             Margins.Top = 5
             Align = alTop
@@ -947,12 +951,13 @@ object frmViewDownload: TfrmViewDownload
               'mmUrlDownload')
             ReadOnly = True
             TabOrder = 1
+            ExplicitWidth = 424
           end
         end
       end
       object pnlDownloadingDetails: TPanel
         Left = 0
-        Top = 87
+        Top = 93
         Width = 577
         Height = 67
         Cursor = crHandPoint
@@ -962,6 +967,7 @@ object frmViewDownload: TfrmViewDownload
         ParentBackground = False
         TabOrder = 1
         Visible = False
+        ExplicitTop = 87
         object lblDownloadName: TLabel
           AlignWithMargins = True
           Left = 10
