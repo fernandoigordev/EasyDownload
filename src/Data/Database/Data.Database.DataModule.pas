@@ -14,6 +14,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
+    procedure HandleExceptions(Sender: TObject; E: Exception);
   public
     { Public declarations }
   end;
@@ -34,6 +35,7 @@ procedure TDataModule1.DataModuleCreate(Sender: TObject);
 var
   DataBasePath: String;
 begin
+  Application.OnException := HandleExceptions;
   DataBasePath := Concat(ExtractFilePath(Application.ExeName), 'database.sqlite');
   if not FileExists(DataBasePath) then
   begin
@@ -43,6 +45,11 @@ begin
 
   FDConnection.Params.Database := DataBasePath;
   FDConnection.Connected := True;
+end;
+
+procedure TDataModule1.HandleExceptions(Sender: TObject; E: Exception);
+begin
+  MessageDlg(Concat('Ocorreu algo de errado na aplicação, por favor contate o suporte e informe o seguinte erro: ', E.Message), TMsgDlgType.mtError, [mbOK], 0);
 end;
 
 end.

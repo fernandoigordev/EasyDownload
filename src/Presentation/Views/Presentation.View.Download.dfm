@@ -15,6 +15,7 @@ object frmViewDownload: TfrmViewDownload
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlContainer: TPanel
@@ -27,10 +28,6 @@ object frmViewDownload: TfrmViewDownload
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 200
-    ExplicitTop = 288
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object pnlFormDownload: TPanel
       Left = 0
       Top = 227
@@ -41,8 +38,6 @@ object frmViewDownload: TfrmViewDownload
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitTop = 225
-      ExplicitWidth = 571
       object lblUrlDownload: TLabel
         Left = 9
         Top = 24
@@ -144,8 +139,7 @@ object frmViewDownload: TfrmViewDownload
       Color = 12413348
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 571
-      object Label1: TLabel
+      object lblTitle: TLabel
         AlignWithMargins = True
         Left = 3
         Top = 140
@@ -162,8 +156,8 @@ object frmViewDownload: TfrmViewDownload
         Font.Style = []
         ParentColor = False
         ParentFont = False
-        ExplicitTop = 137
-        ExplicitWidth = 565
+        ExplicitWidth = 434
+        ExplicitHeight = 29
       end
       object pnlTitleButton: TPanel
         Left = 0
@@ -175,7 +169,6 @@ object frmViewDownload: TfrmViewDownload
         Color = 12413348
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 571
         object imgBack: TImage
           AlignWithMargins = True
           Left = 3
@@ -217,7 +210,6 @@ object frmViewDownload: TfrmViewDownload
         Color = 12413348
         ParentBackground = False
         TabOrder = 1
-        ExplicitWidth = 571
         object imgLogoDownload: TImage
           Left = 0
           Top = 0
@@ -308,8 +300,6 @@ object frmViewDownload: TfrmViewDownload
       ParentBackground = False
       TabOrder = 2
       Visible = False
-      ExplicitWidth = 571
-      ExplicitHeight = 192
       object lblMoreDetails: TLabel
         AlignWithMargins = True
         Left = 3
@@ -344,7 +334,6 @@ object frmViewDownload: TfrmViewDownload
         Color = clWhite
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 571
         object imgDownloading: TImage
           AlignWithMargins = True
           Left = 3
@@ -920,6 +909,7 @@ object frmViewDownload: TfrmViewDownload
             80FA6C0000000049454E44AE426082}
           Proportional = True
           Stretch = True
+          OnClick = Image1Click
           ExplicitLeft = 544
           ExplicitTop = 4
           ExplicitHeight = 105
@@ -934,40 +924,29 @@ object frmViewDownload: TfrmViewDownload
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
-          ExplicitLeft = 192
-          ExplicitTop = 40
-          ExplicitWidth = 185
-          ExplicitHeight = 41
-          object lblDownloadingUrl: TLabel
-            Left = 0
-            Top = 0
-            Width = 430
-            Height = 66
-            Align = alTop
-            AutoSize = False
-            Caption = 'https://exemple.com/download.jpg'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-            Layout = tlCenter
-            ExplicitLeft = -3
-            ExplicitTop = -6
-            ExplicitWidth = 424
-          end
           object ProgressBar1: TProgressBar
             Left = 0
-            Top = 66
+            Top = 71
             Width = 430
             Height = 16
-            Align = alTop
-            Position = 50
+            Align = alBottom
             TabOrder = 0
-            ExplicitLeft = 1
-            ExplicitTop = 65
-            ExplicitWidth = 427
+          end
+          object mmUrlDownload: TMemo
+            AlignWithMargins = True
+            Left = 3
+            Top = 5
+            Width = 424
+            Height = 60
+            Margins.Top = 5
+            Align = alTop
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BorderStyle = bsNone
+            Lines.Strings = (
+              'mmUrlDownload')
+            ReadOnly = True
+            TabOrder = 1
           end
         end
       end
@@ -983,9 +962,6 @@ object frmViewDownload: TfrmViewDownload
         ParentBackground = False
         TabOrder = 1
         Visible = False
-        ExplicitTop = 113
-        ExplicitWidth = 571
-        ExplicitHeight = 60
         object lblDownloadName: TLabel
           AlignWithMargins = True
           Left = 10
@@ -1002,10 +978,9 @@ object frmViewDownload: TfrmViewDownload
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
-          ExplicitLeft = 9
-          ExplicitWidth = 558
+          ExplicitWidth = 70
         end
-        object Label2: TLabel
+        object lblDownloadPercentage: TLabel
           AlignWithMargins = True
           Left = 10
           Top = 22
@@ -1014,18 +989,16 @@ object frmViewDownload: TfrmViewDownload
           Margins.Left = 10
           Margins.Bottom = 0
           Align = alTop
-          Caption = '25%'
+          Caption = '0%'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clGray
           Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
-          ExplicitLeft = 4
-          ExplicitTop = 23
-          ExplicitWidth = 23
+          ExplicitWidth = 17
         end
-        object Label3: TLabel
+        object lblDownloaded: TLabel
           AlignWithMargins = True
           Left = 10
           Top = 43
@@ -1041,11 +1014,13 @@ object frmViewDownload: TfrmViewDownload
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
-          ExplicitLeft = 1
-          ExplicitTop = 33
           ExplicitWidth = 117
         end
       end
     end
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 272
+    Top = 288
   end
 end

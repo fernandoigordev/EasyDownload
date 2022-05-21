@@ -3,35 +3,65 @@ unit Data.Repository.Download.SqLite;
 interface
 
 uses System.Generics.Collections, Domain.Abstraction.Download, Data.Repository.Download.Interfaces,
-  FireDAC.Comp.Client, FireDAC.DApt;
+  FireDAC.Comp.Client, FireDAC.DApt, FireDAC.Phys.SQLite;
 
 type
-RepositoryDownloadSqLite = Class(TInterfacedObject, IRepositoryDownload)
+TRepositoryDownloadSqLite = Class(TInterfacedObject, IRepositoryDownload)
   private
     FQuery: TFDQuery;
   public
-    function List: TObjectList<TAbstractionDownload>;
+    procedure CreateDownload(AbstractionDownload: TAbstractionDownload);
+    function ReadDownloads: TObjectList<TAbstractionDownload>;
+    procedure UpdateDownload(AbstractionDownload: TAbstractionDownload);
     Constructor Create(AConnection: TFdConnection);
     Destructor Destroy;override;
 End;
 
 implementation
 
+uses
+  System.SysUtils;
+
 { RepositoryDownloadSqLite }
 
-constructor RepositoryDownloadSqLite.Create(AConnection: TFdConnection);
+constructor TRepositoryDownloadSqLite.Create(AConnection: TFdConnection);
 begin
   FQuery := TFDQuery.Create(nil);
   FQuery.Connection := AConnection;
 end;
 
-destructor RepositoryDownloadSqLite.Destroy;
+procedure TRepositoryDownloadSqLite.CreateDownload(AbstractionDownload: TAbstractionDownload);
+begin
+  FQuery.Close;
+  FQuery.SQL.Clear;
+
+  if DateToStr(AbstractionDownload.FinalDate) <> '30/12/1899' then
+  begin
+    FQuery.SQL.Add(Concat('INSERT INTO LOGDOWNLOAD(CODIGO, URL, DATAINICIO, DATAFIM) ',
+                         'VALUES(:CODIGO, :URL, :DATAINICIO, :DATAFIM)'));
+    FQuery.ParamByName('CODIGO').AsInteger := AbstractionDownload.Code;
+    FQuery.ParamByName('URL').AsString := AbstractionDownload.Url;
+    FQuery.ParamByName('DATAINICIO').AsDateTime := AbstractionDownload.InitialDate;
+    FQuery.ParamByName('DATAFIM').AsDateTime := AbstractionDownload.FinalDate;
+  end
+  else
+  begin
+    FQuery.SQL.Add(Concat('INSERT INTO LOGDOWNLOAD(CODIGO, URL, DATAINICIO) ',
+                         'VALUES(:CODIGO, :URL, :DATAINICIO)'));
+    FQuery.ParamByName('CODIGO').AsInteger := AbstractionDownload.Code;
+    FQuery.ParamByName('URL').AsString := AbstractionDownload.Url;
+    FQuery.ParamByName('DATAINICIO').AsDateTime := AbstractionDownload.InitialDate;
+  end;
+  FQuery.ExecSQL;
+end;
+
+destructor TRepositoryDownloadSqLite.Destroy;
 begin
   FQuery.Free;
   inherited;
 end;
 
-function RepositoryDownloadSqLite.List: TObjectList<TAbstractionDownload>;
+function TRepositoryDownloadSqLite.ReadDownloads: TObjectList<TAbstractionDownload>;
 var
   ListAbstractionDownload: TObjectList<TAbstractionDownload>;
   AbstractionDownload: TAbstractionDownload;
@@ -60,6 +90,19 @@ begin
 
     Result := ListAbstractionDownload;
   end;
+end;
+
+procedure TRepositoryDownloadSqLite.UpdateDownload(AbstractionDownload: TAbstractionDownload);
+begin
+  FQuery.Close;
+  FQuery.SQL.Clear;
+  FQuery.SQL.Add(Concat('UPDATE LOGDOWNLOAD SET URL = :URL, DATAINICIO = :DATAINICIO, DATAFIM = :DATAFIM ',
+                        'WHERE CODIGO = :CODIGO'));
+  FQuery.ParamByName('CODIGO').AsInteger := AbstractionDownload.Code;
+  FQuery.ParamByName('URL').AsString := AbstractionDownload.Url;
+  FQuery.ParamByName('DATAINICIO').AsDateTime := AbstractionDownload.InitialDate;
+  FQuery.ParamByName('DATAFIM').AsDateTime := AbstractionDownload.FinalDate;
+  FQuery.Execute;
 end;
 
 end.

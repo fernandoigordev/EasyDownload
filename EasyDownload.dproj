@@ -135,6 +135,15 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="src\Domain\UseCases\Download\Create\Domain.UseCase.Download.Create.Interfaces.pas"/>
+        <DCCReference Include="src\Domain\UseCases\Download\Create\Domain.UseCase.Download.Create.pas"/>
+        <DCCReference Include="src\Data\Services\Download\Observer\Data.Service.Download.Observer.Interfaces.pas"/>
+        <DCCReference Include="src\Data\Services\Download\Observer\Data.Service.Download.Observer.Subject.pas">
+            <Form>$R *.res</Form>
+        </DCCReference>
+        <DCCReference Include="src\Presentation\Controllers\Download\Presentation.Controller.Download.Tasks.pas"/>
+        <DCCReference Include="src\Domain\UseCases\Download\Update\Domain.UseCase.Download.Update.Interfaces.pas"/>
+        <DCCReference Include="src\Domain\UseCases\Download\Update\Domain.UseCase.Download.Update.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -160,7 +169,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\EasyDownload.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="EasyDownload.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>EasyDownload.exe</RemoteName>
                         <Overwrite>true</Overwrite>

@@ -54,7 +54,7 @@ uses Presentation.Routes, Data.Database.DataModule;
 procedure TfrmViewDownloadHistory.FormCreate(Sender: TObject);
 begin
   {Se tiver download em andamento mostra o progresso}
-  FRepositoryDownload := RepositoryDownloadSqLite.Create(DataModule1.FDConnection);
+  FRepositoryDownload := TRepositoryDownloadSqLite.Create(DataModule1.FDConnection);
   FControllerDownloadHistory := TControllerDownloadHistory.Create(FRepositoryDownload);
 end;
 
@@ -81,7 +81,17 @@ end;
 
 procedure TfrmViewDownloadHistory.SetValues;
 begin
-  imgListButton.GetBitmap(cdsDownloadHistoryIconIndex.AsInteger, imgButton.Picture.Bitmap);
+  if cdsDownloadHistory.RecordCount > 0 then
+  begin
+    imgFile.Visible := True;
+    imgButton.Visible := True;
+    imgListButton.GetBitmap(cdsDownloadHistoryIconIndex.AsInteger, imgButton.Picture.Bitmap);
+  end
+  else
+  begin
+    imgFile.Visible := False;
+    imgButton.Visible := False;
+  end;
 end;
 
 end.

@@ -13,7 +13,14 @@ uses
   Data.Repository.Download.Interfaces in 'src\Data\Repositories\Download\Data.Repository.Download.Interfaces.pas',
   Data.Repository.Download.SqLite in 'src\Data\Repositories\Download\Data.Repository.Download.SqLite.pas',
   Presentation.Controller.Download.History in 'src\Presentation\Controllers\Download\Presentation.Controller.Download.History.pas',
-  Data.Database.DataModule in 'src\Data\Database\Data.Database.DataModule.pas' {DataModule1: TDataModule};
+  Data.Database.DataModule in 'src\Data\Database\Data.Database.DataModule.pas' {DataModule1: TDataModule},
+  Domain.UseCase.Download.Create.Interfaces in 'src\Domain\UseCases\Download\Create\Domain.UseCase.Download.Create.Interfaces.pas',
+  Domain.UseCase.Download.Create in 'src\Domain\UseCases\Download\Create\Domain.UseCase.Download.Create.pas',
+  Data.Service.Download.Observer.Interfaces in 'src\Data\Services\Download\Observer\Data.Service.Download.Observer.Interfaces.pas',
+  Data.Service.Download.Observer.Subject in 'src\Data\Services\Download\Observer\Data.Service.Download.Observer.Subject.pas',
+  Presentation.Controller.Download.Tasks in 'src\Presentation\Controllers\Download\Presentation.Controller.Download.Tasks.pas',
+  Domain.UseCase.Download.Update.Interfaces in 'src\Domain\UseCases\Download\Update\Domain.UseCase.Download.Update.Interfaces.pas',
+  Domain.UseCase.Download.Update in 'src\Domain\UseCases\Download\Update\Domain.UseCase.Download.Update.pas';
 
 {$R *.res}
 

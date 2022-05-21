@@ -25,7 +25,7 @@ end;
 
 function TUseCaseDownloadHistory.Execute: TObjectList<TAbstractionDownload>;
 begin
-  Result := FRepositoryDownload.List;
+  Result := FRepositoryDownload.ReadDownloads;
 end;
 
 end.

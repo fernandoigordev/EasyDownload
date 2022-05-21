@@ -205,8 +205,6 @@ object frmViewDownloadHistory: TfrmViewDownloadHistory
       TabOrder = 1
       RowCount = 4
       OnPaintPanel = grdDownloadHistoryPaintPanel
-      ExplicitLeft = 2
-      ExplicitTop = 231
       object imgFile: TImage
         AlignWithMargins = True
         Left = 5
@@ -340,7 +338,6 @@ object frmViewDownloadHistory: TfrmViewDownloadHistory
         Color = clWhite
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 407
         object mmUrl: TDBMemo
           AlignWithMargins = True
           Left = 3
@@ -358,8 +355,6 @@ object frmViewDownloadHistory: TfrmViewDownloadHistory
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          ExplicitLeft = 6
-          ExplicitWidth = 401
         end
         object mmDateDetails: TDBMemo
           AlignWithMargins = True
@@ -378,7 +373,6 @@ object frmViewDownloadHistory: TfrmViewDownloadHistory
           Font.Style = []
           ParentFont = False
           TabOrder = 1
-          ExplicitWidth = 401
         end
       end
     end
